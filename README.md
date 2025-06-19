@@ -21,6 +21,7 @@ Une API REST de facturation moderne et légère, construite avec Java 21 et Spri
 - [Tests](#tests)
 - [Architecture](#architecture)
 - [Règles métier](#règles-métier)
+- [swagger ui](#swagger-ui)
 
 ## Fonctionnalités
 
@@ -92,16 +93,17 @@ Pour le développement, utilisez ces identifiants :
 
 ### Aperçu des endpoints
 
-| Méthode  | Endpoint         | Description                    | Auth requise |
-| -------- | ---------------- | ------------------------------ | ------------ |
-| `GET`    | `/clients`       | Liste des clients              | ✅           |
-| `POST`   | `/clients`       | Créer un client                | ✅           |
-| `GET`    | `/clients/{id}`  | Détail d'un client             | ✅           |
-| `DELETE` | `/clients/{id}`  | Supprimer un client            | ✅           |
-| `GET`    | `/factures`      | Liste des factures (filtrable) | ✅           |
-| `POST`   | `/factures`      | Créer une facture              | ✅           |
-| `GET`    | `/factures/{id}` | Détail d'une facture           | ✅           |
-| `DELETE` | `/factures/{id}` | Supprimer une facture          | ✅           |
+| Méthode  | Endpoint           | Description                                   | Auth requise |
+| -------- | ------------------ | --------------------------------------------- | ------------ |
+| `GET`    | `/clients`         | Liste des clients                             | ✅           |
+| `POST`   | `/clients`         | Créer un client                               | ✅           |
+| `GET`    | `/clients/{id}`    | Détail d'un client                            | ✅           |
+| `DELETE` | `/clients/{id}`    | Supprimer un client                           | ✅           |
+| `GET`    | `/factures`        | Liste des factures (filtrable)                | ✅           |
+| `POST`   | `/factures`        | Créer une facture                             | ✅           |
+| `GET`    | `/factures/{id}`   | Détail d'une facture                          | ✅           |
+| `DELETE` | `/factures/{id}`   | Supprimer une facture                         | ✅           |
+| `GET`    | `/factures/search` | Recherche de factures par clientId et/ou date | ✅           |
 
 ### Exemple de requête
 
@@ -258,3 +260,7 @@ sequenceDiagram
 - **Montant TVA** : `totalLigne × (tauxTva / 100)`
 - **Total ligne TTC** : `totalLigne + montantTva`
 - **Total facture** : Somme de toutes les lignes TTC
+
+### swagger ui
+
+![image](screencapture-localhost-8081-swagger-ui-index-html-2025-06-19-01_24_07.png)

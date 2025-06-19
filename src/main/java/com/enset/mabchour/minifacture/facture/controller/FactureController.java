@@ -64,4 +64,27 @@ public class FactureController {
     public void delete(@PathVariable Long id) {
         factureService.deleteById(id);
     }
+
+    /**
+     * Recherche les factures par clientId et/ou date (format yyyy-MM-dd).
+     */
+    @GetMapping("/search")
+    public List<FactureDto> search(
+            @RequestParam(required = false) Long clientId,
+            @RequestParam(required = false) String date
+    ) {
+        if (clientId != null && date != null) {
+            // Recherche combinée (optionnelle, à implémenter dans le service si besoin)
+            return factureService.findAll().stream()
+                    .filter(f -> f.getClient().getId().equals(clientId) && f.getDate().toString().equals(date))
+                    .map(factureMapper::toDto)
+                    .collect(Collectors.toList());
+        } else if (clientId != null) {
+            return factureService.findByClientId(clientId).stream().map(factureMapper::toDto).collect(Collectors.toList());
+        } else if (date != null) {
+            return factureService.findByDate(LocalDate.parse(date)).stream().map(factureMapper::toDto).collect(Collectors.toList());
+        } else {
+            return factureService.findAll().stream().map(factureMapper::toDto).collect(Collectors.toList());
+        }
+    }
 } 
